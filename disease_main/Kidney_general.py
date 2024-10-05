@@ -1,6 +1,5 @@
 import streamlit as st
 
-
 def kidney_gen():
     def calculate_bmi(weight_kg, height_cm):
         height_m = height_cm / 100 
@@ -10,39 +9,36 @@ def kidney_gen():
         'bmi': {
             'Underweight': 1,
             'Normal': 0,
-            'Overweight': 2,
-            'Obese': 3
+            'Overweight': 3,
+            'Obese': 4
         },
         'age': {
             '0-30': 0,
-            '31-50': 1,
-            '51-70': 2,
-            '71+': 3
+            '31-50': 2,
+            '51-70': 3,
+            '71+': 4
         },
         'diabetes_status': {
             'Select': None,
-            'Yes': 3,
+            'Yes': 5,
             'No': 0
         },
         'blood_pressure': {
             'Select': None,
             'Normal': 0,
-            'Elevated': 1,
-            'High Blood Pressure': 2
+            'Slight Swelled': 2,
+            'High Swelled': 3
         },
         'physical_activity': {
             'Select': None,
-            'Sedentary': 3,
-            'Light': 2,
-            'Moderate': 1,
-            'Vigorous': 0
+            'No Urination': 4,
+            'Frequent': 3,
+            'Normal': 0
         },
         'unhealthy_foods': {
             'Select': None,
-            'Always': 3,
-            'Often': 2,
-            'Sometimes': 1,
-            'Rarely': 0,
+            'Heavy Cramps': 4,
+            'Slight Cramps': 1,
             'Never': 0
         }
     }
@@ -59,17 +55,17 @@ def kidney_gen():
             weights['unhealthy_foods'][unhealthy_foods]
         )
         
-        if risk_score <= 5:
+        if risk_score <= 8:
             risk_category = "Safe"
             message = "You are at low risk for kidney disease. Keep maintaining a healthy lifestyle."
             return risk_category, message, "safe"
-        elif 6 <= risk_score <= 11:
+        elif 9 <= risk_score <= 17:
             risk_category = "Moderate Risk"
             message = "You have a moderate risk of kidney disease. Consider consulting a healthcare professional."
             return risk_category, message, "moderate"
         else:
             risk_category = "High Risk"
-            message = "You are at high risk for kidney disease. It's advisable to seek medical attention promptly."
+            message = "You are at high risk for kidney disease. It's advisable to seek medical attention."
             return risk_category, message, "high"
 
     st.title("Kidney Disease Prediction Model")
@@ -112,13 +108,13 @@ def kidney_gen():
         )
     with col5:
         blood_pressure_category = st.selectbox(
-            "Blood Pressure Category", 
+            "Pedaledema (swelling in foot)", 
             options=list(weights['blood_pressure'].keys()), 
             index=0
         )
     with col6:
         physical_activity = st.selectbox(
-            "Physical Activity Level", 
+            "Urination", 
             options=list(weights['physical_activity'].keys()), 
             index=0
         )
@@ -127,7 +123,7 @@ def kidney_gen():
 
     with col7:
         unhealthy_foods = st.selectbox(
-            "Frequency of Unhealthy Foods", 
+            "Muscle cramps", 
             options=list(weights['unhealthy_foods'].keys()), 
             index=0
         )
@@ -184,6 +180,5 @@ def kidney_gen():
             elif risk_level == "high":
                 st.error(f"**Risk Category:** {risk_category}")
                 st.info(message)
-                st.button
         else:
             st.warning("Please make a selection for all dropdown fields before predicting the risk.")
