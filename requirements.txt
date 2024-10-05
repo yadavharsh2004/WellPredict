@@ -93,3 +93,4 @@ uritemplate==4.1.1
 urllib3==2.2.3
 wheel==0.44.0
 PyMuPDF
+frontend
