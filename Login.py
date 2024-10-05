@@ -2,6 +2,7 @@ import streamlit as st
 
 # User data for authentication
 users_data = {
+    'jog':'123',
     "Yatharth Singh": "Y@th@rth@#2005",
     "jane_smith": "securepass456"
 }
